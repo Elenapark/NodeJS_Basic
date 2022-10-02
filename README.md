@@ -54,5 +54,34 @@
 ## Chapter4 : Event Emitter
 
 1. logEvents.js 커스텀 모듈 생성
-2. events common core 모듈을 이용하여 log Event를 listen / emit
+2. events common core 모듈을 이용하여 log Event를 listen / emit 구현
    1. fs.appendFile은 존재하지 않는 file의 경우 생성하면서 컨텐츠를 append하지만 dir의 경우에는 해당되지 않으므로 미리 특정 dir 내부에서 appendFile 메서드를 사용하는 경우 해당 dir가 이미 존재하는지 여부에 따라 fs.mkdir / fs.rmdir로 dir 상태를 컨트롤 후에 사용해야 한다!
+
+## Chapter 5: Build a Web Server
+
+> common core modules 및 port 설정
+
+1. http, path, fs, fsPromises module 사용
+2. port 설정 : 특정 호스팅 서버가 있을 경우 process.env.PORT, 여기서는 3500으로 설정
+
+> http.createServer를 이용하여 server 생성
+
+3. http.createServer((req, res) => {
+   1. req.url의 extname에 따른 contentType 설정
+   2. 설정한 contentType과 req.url에 따라 serve할 file의 filePath 설정
+   3. fs에 2번에서 설정한 filePath가 있는 경우(즉 요청한 파일이 있는 경우)
+      1. 200 ok - serve file
+         - contentType에 image가 포함된 경우 'utf-8'형식 제거
+         - contentType이 application/json인 경우 JSON.parse후 JSON.stringify한 data로 serve
+         - response.writeHead : filePath가 404.html인 경우 404로 설정, 그 외는 200
+   4. fs에 2번에서 설정한 filePath가 없는 경우(즉 요청한 파일이 없는 경우)
+   5. 301 redirect
+   6. 404 not found - serve 404.html file
+      })로 서버 정의
+4. 3번에서 만든 server가 _request를 listen할 수 있도록_ 파일의 맨 밑에서 server.listen(PORT) line을 설정
+
+> request 및 error 로깅
+
+5. event core 모듈과 logEvents 커스텀 모듈을 이용하여 로깅 작업
+   1. reqLog.txt - 요청받은 req의 url, method, 요청 시간 등을 로깅
+   2. errLog.txt - file serve 시 발생하는 error의 내용을 로깅
