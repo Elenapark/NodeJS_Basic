@@ -50,3 +50,9 @@
 
 1. 특정 프로젝트에서 사용하고있는 npm 패키지들을 명세하고있는 파일
 2. npm패키지를 다운받으면 용량이 큰 node_modules 폴더가 생기는데 이를 github에 그대로 올리지 않고(.gitignore 파일을 이용), 해당 패키지명을 명시한 package.json만을 이용하여 npm install 명령어로 유관 패키지 모듈들을 다운로드받아 프로젝트를 셋업할 수 있음.
+
+## Chapter4 : Event Emitter
+
+1. logEvents.js 커스텀 모듈 생성
+2. events common core 모듈을 이용하여 log Event를 listen / emit
+   1. fs.appendFile은 존재하지 않는 file의 경우 생성하면서 컨텐츠를 append하지만 dir의 경우에는 해당되지 않으므로 미리 특정 dir 내부에서 appendFile 메서드를 사용하는 경우 해당 dir가 이미 존재하는지 여부에 따라 fs.mkdir / fs.rmdir로 dir 상태를 컨트롤 후에 사용해야 한다!
