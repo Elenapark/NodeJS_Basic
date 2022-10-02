@@ -15,12 +15,23 @@
 
 > File 모듈을 이용한 파일 읽기/쓰기/수정
 
-1. fs.readFile
-2. fs.writeFile
-3. fs.appendFile
-4. fs.rename
-   ...
+1. fs.readFile : 파일 읽기
+2. fs.writeFile : 파일 쓰기
+3. fs.appendFile : 파일 쓰기 + 추가
+4. fs.rename : 파일명 변경
 
 > 비동기코드의 동기화
 
-1. callback
+1. using callback
+2. using async-await with fsPromises
+
+> 용량이 큰 파일을 읽거나 수정할때, to grab bucket by bucket is better than to grab all at once
+
+1. fs.createReadStream
+2. fs.createWriteStream
+
+> 디렉토리 생성/삭제
+
+1. fs.existsSync : 디렉토리 존재여부 확인
+2. fs.mkdir : 디렉토리 생성
+3. fs.rmdir : 디렉토리 삭제

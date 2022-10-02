@@ -1,49 +1,68 @@
-const fs = require("fs");
+const fsPromises = require("fs").promises;
 const path = require("path");
 
-// 파일 읽기
-fs.readFile(
-  path.join(__dirname, "files", "starter.txt"),
-  "utf8",
-  (err, data) => {
-    if (err) throw err;
-    // console.log(data.toString());
-    console.log(`${data} 읽기 성공`);
-  }
-);
+// 1. callback 을 이용한 비동기 코드의 동기화 - 콜백 헬을 발생시키고 있음.
 
-console.log("내가 제일 먼저 콘솔에 찍힙니당");
+// fs.writeFile(
+//   path.join(__dirname, "files", "reply.txt"),
+//   "만나서 반가워",
+//   (err) => {
+//     if (err) throw err;
+//     console.log(`write 성공!`);
+//     fs.appendFile(
+//       path.join(__dirname, "files", "reply.txt"),
+//       "\n\nreply.txt에서 append 테스트중",
+//       (err) => {
+//         if (err) throw err;
+//         console.log(`append 성공!`);
+//         fs.rename(
+//           path.join(__dirname, "files", "reply.txt"),
+//           path.join(__dirname, "files", "renamedReply.txt"),
+//           (err) => {
+//             if (err) throw err;
+//             console.log(`rename 성공!`);
+//           }
+//         );
+//       }
+//     );
+//   }
+// );
 
-// 아래는 비동기 코드를 동기적으로 실행하지만, 동시에 콜백 헬을 발생시키고 있음.
+// 2. async - await
 
-// 파일 생성
-fs.writeFile(
-  path.join(__dirname, "files", "reply.txt"),
-  "만나서 반가워",
-  (err) => {
-    if (err) throw err;
-    console.log(`write 성공!`);
-    // 파일이 없는 경우 파일 생성 + 이미 있으면 컨텐츠를 매번 append
-    fs.appendFile(
-      path.join(__dirname, "files", "reply.txt"),
-      "\n\nreply.txt에서 append 테스트중",
-      (err) => {
-        if (err) throw err;
-        console.log(`append 성공!`);
-        // 파일명 변경
-        fs.rename(
-          path.join(__dirname, "files", "reply.txt"),
-          path.join(__dirname, "files", "renamedReply.txt"),
-          (err) => {
-            if (err) throw err;
-            console.log(`rename 성공!`);
-          }
-        );
-      }
+const fileOps = async () => {
+  try {
+    const fsReadData = await fsPromises.readFile(
+      path.join(__dirname, "files", "starter.txt"),
+      "utf-8"
     );
-  }
-);
+    console.log(`fsPromises:${fsReadData}`);
+    await fsPromises.unlink(path.join(__dirname, "files", "starter.txt"));
+    await fsPromises.writeFile(
+      path.join(__dirname, "files", "promiseWrite.txt"),
+      fsReadData
+    );
+    await fsPromises.appendFile(
+      path.join(__dirname, "files", "promiseWrite.txt"),
+      "\n\n async-await로 append 다시 test중!"
+    );
 
+    await fsPromises.rename(
+      path.join(__dirname, "files", "promiseWrite.txt"),
+      path.join(__dirname, "files", "renamedPromiseWrite.txt")
+    );
+
+    const newData = await fsPromises.readFile(
+      path.join(__dirname, "files", "renamedPromiseWrite.txt"),
+      "utf-8"
+    );
+    console.log(`result:${newData}`);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+fileOps();
 // exit on uncaught errors
 process.on("uncaughtException", (err) => {
   console.log(`There was an uncaught error: ${err}`);
