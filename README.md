@@ -35,3 +35,18 @@
 1. fs.existsSync : 디렉토리 존재여부 확인
 2. fs.mkdir : 디렉토리 생성
 3. fs.rmdir : 디렉토리 삭제
+
+## Chapter3 : NPM Modules
+
+> NPM Module와 Node common core modules
+
+1. NPM : node modules that are created by third parties (by other developers)
+2. npm i nodemon -g :
+   1. install a package _globally_
+   2. nodemon monitors and automatically restarts server when changes occur
+3. npm init : initialize npm just for _my project_ -> generates package.json file
+
+> package.json
+
+1. 특정 프로젝트에서 사용하고있는 npm 패키지들을 명세하고있는 파일
+2. npm패키지를 다운받으면 용량이 큰 node_modules 폴더가 생기는데 이를 github에 그대로 올리지 않고(.gitignore 파일을 이용), 해당 패키지명을 명시한 package.json만을 이용하여 npm install 명령어로 유관 패키지 모듈들을 다운로드받아 프로젝트를 셋업할 수 있음.
