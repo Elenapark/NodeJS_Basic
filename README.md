@@ -75,9 +75,9 @@
          - contentType이 application/json인 경우 JSON.parse후 JSON.stringify한 data로 serve
          - response.writeHead : filePath가 404.html인 경우 404로 설정, 그 외는 200
    4. fs에 2번에서 설정한 filePath가 없는 경우(즉 요청한 파일이 없는 경우)
-   5. 301 redirect
-   6. 404 not found - serve 404.html file
-      })로 서버 정의
+      1. 301 redirect
+      2. 404 not found - serve 404.html file
+         })로 서버 정의
 4. 3번에서 만든 server가 _request를 listen할 수 있도록_ 파일의 맨 밑에서 server.listen(PORT) line을 설정
 
 > request 및 error 로깅
@@ -85,3 +85,11 @@
 5. event core 모듈과 logEvents 커스텀 모듈을 이용하여 로깅 작업
    1. reqLog.txt - 요청받은 req의 url, method, 요청 시간 등을 로깅
    2. errLog.txt - file serve 시 발생하는 error의 내용을 로깅
+
+## Chapter 6: Intro to Express JS framework
+
+> Node.js to Express.js
+
+1. express.js를 이용한 서버 생성
+2. get 메서드를 이용하여 요청 url에 적합한 파일 제공 or 특정 url로 redirect 등 가능
+3. get 메서드의 콜백함수 내 next 인자를 이용하여 라우팅 체이닝 가능
