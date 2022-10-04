@@ -1,6 +1,51 @@
-20221003	04:22:06	8fc0658d-3b7b-43f0-b083-fcf9c4a58f50	/ 	 GET
-20221003	04:22:06	4f093b87-8508-44b7-bb16-19996affbf7c	/css/style.css 	 GET
-20221003	04:22:06	c9c4bf6b-1515-4690-8039-389acf09ab15	/favicon.ico 	 GET
-20221003	04:23:15	0908b01e-2cc6-4f8f-ad89-87547cac6f83	/ 	 GET
-20221003	04:24:39	7bca92a3-0838-4784-ba0e-c3882252144b	/ 	 GET
-20221003	04:24:39	992ec079-631c-488e-83b8-e9659607f217	/css/style.css 	 GET
+20221004	21:04:05	550ec7ba-2aab-4ee3-954d-8be1a76bb64a	OPTIONS 	https://www.google.co.kr /
+20221004	21:04:05	60ee4639-e615-46bf-8bc1-de48a584b57c	GET 	https://www.google.co.kr /
+20221004	21:49:27	99d0848e-b1a1-4961-854d-588f12c1d908	GET 	undefined /
+20221004	21:49:27	bdab8f5a-7ff2-48bb-b864-b5453c185404	GET 	undefined /css/style.css
+20221004	21:49:44	2718a803-600c-4b5a-b489-fcbcef88d394	GET 	undefined /
+20221004	21:51:15	7d3cd861-9cb5-4111-b91a-250b5fc85c08	OPTIONS 	https://www.google.com /
+20221004	21:51:16	60eb15ed-cb68-4ba3-8b87-756d50727796	GET 	https://www.google.com /
+20221004	21:54:50	5995bb0f-1418-46e7-8461-d0fbcca94608	OPTIONS 	https://www.google.com /
+20221004	21:54:50	71d410fd-74f4-42af-95a4-bb74d4392d83	GET 	https://www.google.com /
+20221004	21:55:19	b31c4040-2e44-4404-83d4-cb835710e60b	OPTIONS 	https://www.google.com /
+20221004	21:55:19	60921d9a-da6e-4f23-b2c6-93cb92a5e701	GET 	https://www.google.com /
+20221004	22:04:56	6077b6cc-c712-4d8e-a9ec-5a24cde4e6f2	OPTIONS 	https://www.naver.com /
+20221004	22:04:56	f0fc6539-30ce-402e-b159-b085f0878628	GET 	https://www.naver.com /
+20221004	22:05:47	f8072065-41e9-44dc-9878-356ae9dfd52c	OPTIONS 	https://www.naver.com /
+20221004	22:05:47	058d6932-8e3c-4bab-8727-d496909835a6	GET 	https://www.naver.com /
+20221004	22:10:33	d2bb6b5a-8316-438a-9212-c579c8154e37	GET 	undefined /
+20221004	22:13:20	f956ebd8-4d9d-45b2-8ffb-5b0554b9372b	GET 	undefined /
+20221004	22:13:27	7ef3c491-c7a6-4a54-ba17-13b4154100b4	GET 	undefined /
+20221004	22:13:29	bd562aa4-bbc7-43a1-afd0-262b87ee05cc	GET 	undefined /index.html
+20221004	22:14:07	b1bfe030-16ee-4872-adbf-c8b47a63ba46	GET 	undefined /
+20221004	22:14:14	fd70d603-6856-418a-9b9b-b4ff204b8ff0	OPTIONS 	https://www.naver.com /
+20221004	22:14:14	63a16a67-7b25-417b-8fee-aad6a6112a52	GET 	https://www.naver.com /
+20221004	22:15:23	8b9a33a2-b299-4d44-9276-2fc7d94aaa48	OPTIONS 	https://www.naver.com /
+20221004	22:15:24	90cc75a0-7af6-4851-954d-e2b870a73803	GET 	https://www.naver.com /
+20221004	22:15:33	2dd31e07-8fb7-4aec-b39a-9936b9514130	GET 	undefined /
+20221004	22:15:42	841cedb7-9f9f-4c29-bbe9-31fd366e2eec	OPTIONS 	https://www.google.com /
+20221004	22:15:42	ca61f159-6ffa-4474-8f45-5c1c221f54d8	GET 	https://www.google.com /
+20221004	22:15:58	a729915c-7fc2-4969-9d06-84c079844c47	GET 	undefined /
+20221004	22:15:58	128aad47-712b-408e-979f-393713b0f187	GET 	undefined /css/style.css
+20221004	22:26:54	11392460-e56a-4e0c-b334-009ea91e0f8a	GET 	undefined /
+20221004	22:26:54	9be49d92-3269-4681-8952-bbe103758173	GET 	undefined /css/style.css
+20221004	22:27:18	658f9abb-834d-4e4b-8494-0e3380df760a	GET 	undefined /
+20221004	22:27:47	2063b7d7-2aec-41e1-a4e9-e1ad1069a988	GET 	undefined /
+20221004	22:28:02	7daea04f-759d-4e28-a095-15a96f7e9717	GET 	undefined /
+20221004	22:28:02	e2312ced-7bfb-4a05-94ae-eba5c43d5889	GET 	undefined /css/style.css
+20221004	22:32:27	7af057d3-f04b-4b93-90db-8af6e98e68f5	GET 	undefined /
+20221004	22:32:27	6e337072-4020-44a8-9c19-7b445f412107	GET 	undefined /css/style.css
+20221004	22:32:29	74f54b9b-38be-4273-8bdc-fe675699f08c	GET 	undefined /subdir
+20221004	22:32:30	ab689efb-96ba-4a04-96dd-70a44a01b408	GET 	undefined /css/style.css
+20221004	22:32:35	c7719e5a-f9d2-4151-886e-ebee6597531f	GET 	undefined /dave
+20221004	22:32:35	40e7d4bc-586c-4766-8821-e6421fc12af8	GET 	undefined /css/style.css
+20221004	22:32:40	014caa5c-1a74-4147-8462-9dd9c4326669	GET 	undefined /index.html
+20221004	22:32:40	b8bad290-80b0-408f-a567-541235a5754f	GET 	undefined /css/style.css
+20221004	22:32:44	ca6ec73d-20eb-49ee-a879-725de0f7b609	GET 	undefined /new-page.html
+20221004	22:32:44	bceef191-2eb0-4f4b-8760-6258f0dfed7b	GET 	undefined /img/img1.jpg
+20221004	22:32:44	8c43cd17-6b46-40aa-8c2a-6f0f856084af	GET 	undefined /css/style.css
+20221004	22:32:49	888ded4c-3613-45ee-9d80-aec719dab5be	GET 	undefined /new-page.html
+20221004	22:32:49	eef920d0-ff8f-49ab-b159-497d44a42242	GET 	undefined /css/style.css
+20221004	22:32:49	4fda9328-602e-4c76-b205-b404182f5f8e	GET 	undefined /img/img1.jpg
+20221004	22:32:52	c6882f49-6a1d-4c6a-b723-aca55cd2bd3d	GET 	undefined /a
+20221004	22:32:52	d38938c1-05ed-423a-8a05-951d639743b3	GET 	undefined /css/style.css
