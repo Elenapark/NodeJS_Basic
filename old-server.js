@@ -4,7 +4,7 @@ const fs = require("fs");
 const fsPromises = require("fs").promises;
 
 // custom modules not npm nor common core modules
-const logEvents = require("./logEvents");
+const logEvents = require("./middleware/logEvents");
 // event common core modules
 const EventEmitter = require("events");
 class MyEmitter extends EventEmitter {}

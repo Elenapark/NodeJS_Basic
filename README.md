@@ -93,3 +93,26 @@
 1. express.js를 이용한 서버 생성
 2. get 메서드를 이용하여 요청 url에 적합한 파일 제공 or 특정 url로 redirect 등 가능
 3. get 메서드의 콜백함수 내 next 인자를 이용하여 라우팅 체이닝 가능
+
+## Chapter 7: Middleware
+
+> What is Middleware ?
+
+- Anything between the _Request_ and _Response_ !!
+
+> Built-in middlewares
+
+1. express.urlencoded() : form data 를 핸들링하는 빌트인 미들웨어
+2. express.json() : json data 를 핸들링하는 빌트인 미들웨어
+3. express.static() : 정적인 파일들을 핸들링하는 빌트인 미들웨어
+
+> Custom middleware
+
+1. 리퀘스트 로깅 미들웨어 : 파일의 가장 top level에서 선언
+2. 에러 로깅 미들웨어
+
+> Third party middleware
+
+1. cors : 다른 사이트에서 나의 서버에 request를 보내는 것을 허가하도록 하는 써드파티 미들웨어
+   1. 모든 사이트에 제한 없이 허가 - app.use(cors());
+   2. 모든 사이트가 아닌 특정 도메인에서만 request 보내는 것을 허가 - 허용할 도메인 주소를 app.use(cors(corsOptions))로 전달하도록 함
