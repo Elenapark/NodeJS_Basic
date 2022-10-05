@@ -49,3 +49,13 @@
 20221004	22:32:49	4fda9328-602e-4c76-b205-b404182f5f8e	GET 	undefined /img/img1.jpg
 20221004	22:32:52	c6882f49-6a1d-4c6a-b723-aca55cd2bd3d	GET 	undefined /a
 20221004	22:32:52	d38938c1-05ed-423a-8a05-951d639743b3	GET 	undefined /css/style.css
+20221005	23:57:16	a0c11989-1d79-47b4-8126-85ddc59f12ad	GET 	undefined /
+20221005	23:57:16	c62f3898-8def-42b0-9b4c-288515cf6fb9	GET 	undefined /css/style.css
+20221005	23:57:20	3d1d1553-efea-424d-a0aa-1d1b9e403124	GET 	undefined /subdir
+20221005	23:57:47	156c566d-a9fd-4d93-8cee-be06f2162574	GET 	undefined /subdir/test
+20221005	23:57:58	f8ed80da-4e6d-4a8c-aa70-10819b320890	GET 	undefined /subdir/testsd
+20221005	23:57:58	f923ee6b-c192-4ff9-9ff9-e15a2124c763	GET 	undefined /subdir/css/style.css
+20221005	23:59:19	82abeaad-1fac-417c-ad71-10aa3b3538e0	GET 	undefined /subdir/testsd
+20221005	23:59:20	3203ae4a-b9c5-4305-a5e4-f179e8ef9449	GET 	undefined /subdir/css/style.css
+20221005	23:59:22	a60e0fe6-e2ee-41fd-84b5-864f29e092cf	GET 	undefined /subdir/testsdsdfs
+20221005	23:59:22	2bf27910-1039-47d5-b6e2-76db12d41c1d	GET 	undefined /subdir/css/style.css

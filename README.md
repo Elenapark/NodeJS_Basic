@@ -116,3 +116,5 @@
 1. cors : 다른 사이트에서 나의 서버에 request를 보내는 것을 허가하도록 하는 써드파티 미들웨어
    1. 모든 사이트에 제한 없이 허가 - app.use(cors());
    2. 모든 사이트가 아닌 특정 도메인에서만 request 보내는 것을 허가 - 허용할 도메인 주소를 app.use(cors(corsOptions))로 전달하도록 함
+
+## Chapter 7: Routing

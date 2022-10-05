@@ -36,7 +36,12 @@ app.use(express.urlencoded({ extended: false }));
 // json 파일을 핸들링하기 위한 빌트인 미들웨어
 app.use(express.json());
 // 정적인 파일을 제공하기 위한 빌트인 미들웨어
-app.use(express.static(path.join(__dirname, "public")));
+app.use("/", express.static(path.join(__dirname, "public")));
+// subdir용으로 정적 파일 제공
+app.use("/subdir", express.static(path.join(__dirname, "public")));
+
+// /subdir로 오는 request는 모두 routes/subdir파일로 연결되게 함
+app.use("/subdir", require("./routes/subdir"));
 
 app.get("^/$|/index(.html)?", (req, res) => {
   // res.sendFile("./views/index.html", { root: __dirname });
