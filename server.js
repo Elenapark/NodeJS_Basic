@@ -4,31 +4,13 @@ const path = require("path");
 const cors = require("cors");
 const { logEvents, logger } = require("./middleware/logEvents");
 const errorHandler = require("./middleware/errorHandler");
+const corsOptions = require("./config/corsOptions");
 const PORT = process.env.PORT || 3500;
 
 // custom middleware logger
 app.use(logger);
 
-// apply cross origin resource sharing
-// 다른 사이트에서 나의 서버에 request를 보내는 것을 허가하는 두가지 방법
-
-// 1. 모든 사이트에 제한 없이 허가
-// app.use(cors());
-
-// 2. 모든 사이트가 아닌 특정 도메인에만 request 보내는 것을 허가 (ex,google에만 허용)
-const whitelist = ["https://www.google.com", "http://localhost:3500"];
-const corsOptions = {
-  origin: (origin, callback) => {
-    // origin : req를 보내는 domain
-    console.log("request domain", origin);
-    if (whitelist.indexOf(origin) !== -1 || !origin) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  optionsSuccessStatus: 200,
-};
+// cors 설정
 app.use(cors(corsOptions));
 
 // formData를 핸들링하기 위한 빌트인 미들웨어 (즉,content-type: application/x-www-form-urlencoded)
