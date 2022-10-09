@@ -1,0 +1,15 @@
+const express = require("express");
+const path = require("path");
+const router = express.Router();
+
+router.get("^/$|/index(.html)?", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "views", "index.html"));
+});
+router.get("/new-page(.html)?", (req, res) => {
+  res.sendFile(path.join(__dirname, "..", "views", "new-page.html"));
+});
+router.get("/old-page(.html)?", (req, res) => {
+  res.redirect(301, "/new-page.html"); // status code : 302 by default 이므로 301로 지정 필요
+});
+
+module.exports = router;
