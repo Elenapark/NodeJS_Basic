@@ -35,49 +35,19 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 // json 파일을 핸들링하기 위한 빌트인 미들웨어
 app.use(express.json());
-// 정적인 파일을 제공하기 위한 빌트인 미들웨어
-app.use(express.static(path.join(__dirname, "public")));
 
-app.get("^/$|/index(.html)?", (req, res) => {
-  // res.sendFile("./views/index.html", { root: __dirname });
-  res.sendFile(path.join(__dirname, "views", "index.html"));
-});
+// SERVER STATIC FILES
+// 정적인 파일을 제공하기 위한 빌트인 미들웨어 (디폴트 url은 '/')
+app.use("/", express.static(path.join(__dirname, "public")));
+// subdir용으로 정적 파일 제공
+app.use("/subdir", express.static(path.join(__dirname, "public")));
 
-app.get("/new-page(.html)?", (req, res) => {
-  res.sendFile(path.join(__dirname, "views", "new-page.html"));
-});
-
-app.get("/old-page(.html)?", (req, res) => {
-  res.redirect(301, "/new-page.html"); // status code : 302 by default 이므로 301로 지정 필요
-});
-
-// route handler
-
-app.get(
-  "/hello(.html)?",
-  (req, res, next) => {
-    console.log("attempted to load hello.html");
-    next();
-  },
-  (req, res) => {
-    res.send("hello world");
-  }
-);
-
-const one = (req, res, next) => {
-  console.log("one");
-  next();
-};
-const two = (req, res, next) => {
-  console.log("two");
-  next();
-};
-const three = (req, res) => {
-  console.log("three");
-  res.send("Finished");
-};
-
-app.get("/chain(.html)?", [one, two, three]);
+// ROUTE
+// /로 오는 request는 모두 routes/root파일로 연결되게 함
+app.use("/", require("./routes/root"));
+// /subdir로 오는 request는 모두 routes/subdir파일로 연결되게 함
+app.use("/subdir", require("./routes/subdir"));
+app.use("/employees", require("./routes/api/employees"));
 
 // app.use('/') - does not accept regex  / used for middleware
 // app.get("/*", (req, res) => {

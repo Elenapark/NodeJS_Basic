@@ -116,3 +116,14 @@
 1. cors : 다른 사이트에서 나의 서버에 request를 보내는 것을 허가하도록 하는 써드파티 미들웨어
    1. 모든 사이트에 제한 없이 허가 - app.use(cors());
    2. 모든 사이트가 아닌 특정 도메인에서만 request 보내는 것을 허가 - 허용할 도메인 주소를 app.use(cors(corsOptions))로 전달하도록 함
+
+## Chapter 8: Routing
+
+> 하위 디렉토리 라우팅 설정
+
+1. app.use('/subdir', require('./routes/subdir'))=> /subdir로 접근하는 경우 routes 폴더 내 subdir 폴더를 읽을 것을 설정
+
+> /employees로 접근하는 경우의 라우팅 설정
+
+1. router.router('/').get().post().put().delete()의 체이닝을 통해 같은 주소이지만 서로 다른 http메서드로 접근하는 경우의 개별 응답값을 설정
+2. thunder client 익스텐션 사용하여 api 테스닝 => vs code 내에서 postman과 같은 api test 역할을 하는 익스텐션
