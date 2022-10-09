@@ -127,3 +127,14 @@
 
 1. router.router('/').get().post().put().delete()의 체이닝을 통해 같은 주소이지만 서로 다른 http메서드로 접근하는 경우의 개별 응답값을 설정
 2. thunder client 익스텐션 사용하여 api 테스닝 => vs code 내에서 postman과 같은 api test 역할을 하는 익스텐션
+
+## Chapter 9: MVC Rest API
+
+> MVC pattern : Model - View - Controller
+
+1. express.js is an unopinionated framework -> 사용자가 원하는대로 프로젝트를 오거나이징 할 수 있음
+
+2. MVC 패턴으로 변경하기 및 코드 클린업
+   1. data dir -> model dir
+   2. controllers - employeesControlles: routes dir - api - employees.js 내 분산되어있던 각 http메서드에 대한 로직을 분리하여 컨트롤러 단에서 관리
+   3. server.js에서 필요없는 코드 정리 및 분리
