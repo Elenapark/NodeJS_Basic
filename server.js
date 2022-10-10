@@ -21,14 +21,12 @@ app.use(express.json());
 // SERVER STATIC FILES
 // 정적인 파일을 제공하기 위한 빌트인 미들웨어 (디폴트 url은 '/')
 app.use("/", express.static(path.join(__dirname, "public")));
-// subdir용으로 정적 파일 제공
-app.use("/subdir", express.static(path.join(__dirname, "public")));
 
 // ROUTE
 // /로 오는 request는 모두 routes/root파일로 연결되게 함
 app.use("/", require("./routes/root"));
-// /subdir로 오는 request는 모두 routes/subdir파일로 연결되게 함
-app.use("/subdir", require("./routes/subdir"));
+app.use("/register", require("./routes/register"));
+app.use("/auth", require("./routes/auth"));
 app.use("/employees", require("./routes/api/employees"));
 
 // app.use('/') - does not accept regex  / used for middleware

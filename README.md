@@ -138,3 +138,16 @@
    1. data dir -> model dir
    2. controllers - employeesControlles: routes dir - api - employees.js 내 분산되어있던 각 http메서드에 대한 로직을 분리하여 컨트롤러 단에서 관리
    3. server.js에서 필요없는 코드 정리 및 분리
+
+## Chapter 10: Authentication
+
+1. 회원가입 시뮬레이션 : registerControllers - register routes - users model 이용
+
+   - **bcrypt.hash** 함수를 이용하여 유저가 회원가입 시 입력하는 비밀번호를 암호화 시켜 데이터베이스에 저장함. const hashedPwd = await bcrypt.hash(pwd, 10);
+
+2. 로그인 코드 시뮬레이션 : authControllers - auth routes - users model 이용
+
+   - **bcrypt.compare**함수로 유저가 로그인 시 입력한 비밀번호와 기존에 가입한 비밀번호를 비교하여 match되는 경우 JWT 토큰을 발행하면서 로그인을 성공시킴
+
+3. 사용한 HTTP method
+   - 200, 201, 400, 401, 409, 500
