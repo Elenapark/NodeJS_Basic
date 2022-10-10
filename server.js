@@ -5,10 +5,19 @@ const cors = require("cors");
 const { logEvents, logger } = require("./middleware/logEvents");
 const errorHandler = require("./middleware/errorHandler");
 const corsOptions = require("./config/corsOptions");
+const verifyJWT = require("./middleware/verifyJWT");
+const cookieParser = require("cookie-parser");
+const credentials = require("./middleware/credentials");
+
 const PORT = process.env.PORT || 3500;
 
 // custom middleware logger
 app.use(logger);
+
+// handle option credentials check - before CORS setting!
+// cors설정 이전에 하는 이유는 cors가 response header에 credential setting이 안되어있는
+// 요청에 대해 에러 처리를 하므로
+app.use(credentials);
 
 // cors 설정
 app.use(cors(corsOptions));
@@ -17,6 +26,9 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 // json 파일을 핸들링하기 위한 빌트인 미들웨어
 app.use(express.json());
+
+// middleware for cookies
+app.use(cookieParser());
 
 // SERVER STATIC FILES
 // 정적인 파일을 제공하기 위한 빌트인 미들웨어 (디폴트 url은 '/')
@@ -27,6 +39,10 @@ app.use("/", express.static(path.join(__dirname, "public")));
 app.use("/", require("./routes/root"));
 app.use("/register", require("./routes/register"));
 app.use("/auth", require("./routes/auth"));
+app.use("/refresh", require("./routes/refresh"));
+app.use("/logout", require("./routes/logout"));
+
+app.use(verifyJWT);
 app.use("/employees", require("./routes/api/employees"));
 
 // app.use('/') - does not accept regex  / used for middleware

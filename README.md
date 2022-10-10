@@ -151,3 +151,66 @@
 
 3. 사용한 HTTP method
    - 200, 201, 400, 401, 409, 500
+
+## Chapter 11: JWT Auth
+
+> JWT ? JSON Web Tokens
+
+- A form of user identification that is issued after the initial user authentication takes place
+
+> Hazards: XSS / CSRF Attacks
+
+1. XSS : Cross Site Scripting
+2. CSRF : CS Request Forgery
+
+> what happens When user logs in?
+
+1. 유저가 로그인에 성공하면 Access Token, Refresh Token을 응답 값으로 받는다.
+
+   1. Access Token: 보통 5~15분의 짧은 유효기간을 가짐
+   2. Refresh Token: 보통 몇시간~ 며칠의 다소 긴 유효기간을 가짐
+
+2. API는 클라이언트 단과 **액세스 토큰**을 JSON 데이터로 주고 / 받는다.
+
+   1. 클라이언트 단에서는 XSS / CSRF 공격을 피하기 위해 _메모리_ 에만 액세스 토큰을 저장하는게 권장된다. (클라이언트 앱 내 state를 의미)
+      => APP이 종료되면 자동으로 토큰이 사라질 수 있으므로
+   2. 로컬스토리지 또는 쿠키에 액세스 토큰을 저장하지 않는다 !
+
+3. API는 클라이언트 단에 **리프레시 토큰** 을 httpOnly cookie로 전송한다.
+   1. 이 쿠키는 Javascript를 이용해서 접근할 수 없다.
+   2. 리프레시 토큰은 반드시 만료기한을 가져야 한다. => 그래야 유저가 다시 로그인을 시도하는 과정이 있으므로
+   3. 리프레시 토큰은 새로운 리프레시 토큰을 생성할 수 없어야 한다. => 그래야 리프레시 토큰이 탈취당하더라도 indefinte access를 막을 수 있다
+
+> Access Token
+
+1. Issued at User Authorization stage
+2. Client uses for API Access/Request (protected routes) until expires
+3. API verify the access token with Middleware everytime the access token is used
+4. When the access token expires, user will need to send their refresh token to the API's refresh endpoint to get a new access token!
+
+> Refresh Token
+
+1. Issued at User Authorization stage as well
+2. Client uses to get a new Access Token
+3. API verify the refresh token received from user and cross-reference the refresh token in our database too
+4. Storing a reference to the refresh token in the database will allow refresh tokens to be terminated early when user logs out
+5. Must be allowed to expire or logout So indefinte access cannot be gained!
+
+> how to randomly make access_token_secret / refresh_token_secret to use when make jwt token
+
+1. require('crypto').randomBytes(64).toString('hex')
+2. add randomly generated secret to .env file
+
+> few setCookie/clearCookie properties
+
+1. httpOnly: true
+   - refresh token은 httpOnly cookie로 전송해야 보안에 유리하다.
+   - JavaScript 코드로 (ex.Document.cookie) 쿠키에 접근하는 것을 막으며 XSS 공격을 경감시킨다.
+2. sameSite : None/Lax/Strict
+   - 기본적으로 쿠키는 대상 도메인 기준으로 포함 전송 유무가 판단됨.
+   1. None: same site 검증 x : a -> b 사이트로 요청이 있을 시 b사이트의 쿠키가 붙어서 전송됨.
+   2. Lax: same site 검증 o : 허용된 몇개의 패턴 이외에는 same site가 아니면 쿠키를 전송하지 않도록 강제하는 _디폴트_ 쿠키 정책.
+   3. Strict : same site인지 엄격하게 검증 : 소스가 되는 도메인과 대상 도메인이 일치하는 경우에만 쿠키가 붙어서 전송됨. google.com => google.com (o) / naver.com => google.com (x)
+3. secure : true
+   - Indicates that the cookie is sent to the server only when a request is made with the https: scheme (except on localhost),
+4. maxAge :cookie가 만료될때까지의 시간(초) 설정
