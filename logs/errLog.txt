@@ -4,3 +4,4 @@
 20221010	01:58:43	1d267195-7f6d-4b13-962d-9fe2d2b98b7b	SyntaxError, Unexpected token { in JSON at position 32
 20221010	01:59:03	a7039021-fde5-440e-86a2-74cdad8f7f06	SyntaxError, Unexpected token { in JSON at position 33
 20221010	01:59:07	0cfd0e65-2df5-4453-a767-150f0248147b	SyntaxError, Unexpected token { in JSON at position 33
+20221011	00:38:00	e851713e-6e32-4598-b66e-f29ce265b6cc	TypeError, res.sendStatue is not a function
