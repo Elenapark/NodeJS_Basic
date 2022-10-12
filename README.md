@@ -214,3 +214,17 @@
 3. secure : true
    - Indicates that the cookie is sent to the server only when a request is made with the https: scheme (except on localhost),
 4. maxAge :cookie가 만료될때까지의 시간(초) 설정
+
+## Chapter 12: User Roles
+
+> Authentication (인증)
+
+- 유저의 identification을 확인하는 절차 (로그인 과정)
+- ex) When we log in with the username and password, we are verifying who we are, and this is considered to be authentication.
+
+> Authorization (인가)
+
+- 로그인 이후 유저가 API 요청 시 어떠한 리소스까지 접근할 수 있는 유저인지 확인하는 절차
+- ex) After logging in, API issues users JWT tokens.
+  - it's true that the tokens confirm the authentication process
+  - these tokens also allow access to our api endpoints which allow our api data. this is authorization.

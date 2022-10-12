@@ -19,6 +19,9 @@ app.use(logger);
 // 요청에 대해 에러 처리를 하므로
 app.use(credentials);
 
+// middleware for cookies
+app.use(cookieParser());
+
 // cors 설정
 app.use(cors(corsOptions));
 
@@ -26,9 +29,6 @@ app.use(cors(corsOptions));
 app.use(express.urlencoded({ extended: false }));
 // json 파일을 핸들링하기 위한 빌트인 미들웨어
 app.use(express.json());
-
-// middleware for cookies
-app.use(cookieParser());
 
 // SERVER STATIC FILES
 // 정적인 파일을 제공하기 위한 빌트인 미들웨어 (디폴트 url은 '/')
