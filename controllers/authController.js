@@ -21,17 +21,25 @@ const handleLogin = async (req, res) => {
       .json({ "message:": "Username and Password are required" });
 
   const foundUser = usersDB.users.find((person) => person.username === user);
-  if (!foundUser) return res.sendState(401); // Stands for unathorized
+  if (!foundUser) return res.sendStatus(401); // Stands for unathorized
 
   // 유저가 입력한 pwd와 기존에 저장된 유저 pwd를 비교
   const match = await bcrypt.compare(pwd, foundUser.password);
   if (match) {
+    const roles = Object.values(foundUser.roles);
+
     // create JWTs
     const accessToken = jwt.sign(
-      { username: foundUser.username },
+      {
+        UserInfo: {
+          username: foundUser.username,
+          roles: roles,
+        },
+      },
       process.env.ACCESS_TOKEN_SECRET,
       { expiresIn: "30s" }
     );
+    // only for getting new access_token
     const refreshToken = jwt.sign(
       { username: foundUser.username },
       process.env.REFRESH_TOKEN_SECRET,
@@ -52,7 +60,7 @@ const handleLogin = async (req, res) => {
     res.cookie("jwt", refreshToken, {
       httpOnly: true,
       sameSite: "None",
-      secure: true,
+      // secure: true,
       maxAge: 24 * 60 * 60 * 1000, // 1day
     });
     res.json({ accessToken });
