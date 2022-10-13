@@ -2,12 +2,14 @@ const Employee = require("../model/Employee");
 
 const getAllEmployees = async (req, res) => {
   const employees = await Employee.find();
-  if (!employees)
+  if (!employees) {
     return res.status(204).json({ message: "No employees found." });
+  }
   res.json(employees);
 };
 
 const createNewEmployee = async (req, res) => {
+  console.log("직원생성req:", req.body);
   if (!req?.body?.firstname || !req?.body?.lastname) {
     return res
       .status(400)
@@ -17,8 +19,8 @@ const createNewEmployee = async (req, res) => {
   try {
     // create and store the new employee all at once
     const result = await Employee.create({
-      firstname: req.firstname,
-      lastname: req.lastname,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
     });
 
     console.log("새로생성된직원:", result);
@@ -60,7 +62,10 @@ const deleteEmployee = async (req, res) => {
 
   const result = await employee.deleteOne({ _id: req.body.id });
   console.log("직원정보삭제:", result);
-  res.json(result);
+  res.json({
+    data: result,
+    message: "deleted successfully",
+  });
 };
 
 const getEmployee = async (req, res) => {
@@ -73,6 +78,7 @@ const getEmployee = async (req, res) => {
       .status(204)
       .json({ message: `No employee matches ID:${req.params.id}.` });
   }
+
   res.json(employee);
 };
 
