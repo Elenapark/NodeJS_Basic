@@ -236,4 +236,36 @@
 ## Chapter 13: Intro to MongoDB and Mongoose
 
 - MongoDB 설정: 클러스터 및 DATABASE URI 생성 후 .env파일로 프로젝트 연결
-- Mongoose 설정: MongoDB의 편리한 사용을 도와주는 라이브러리 개념. DB 연결 및 연결 이후에만 server가 port를 listening할 수 있도록 코드 수정
+- Mongoose 설정: MongoDB와 프로젝트 연결을 도와주는 라이브러리. + DB 연결 이후에만 server가 port를 listening할 수 있도록 수정
+
+## Chapter 14-15: Mongoose Data Models / Async CRUD Operations
+
+> MongoDB에서 CRUD를 구현하기 위해 필요한 스펙
+
+- Mongoose Schemas
+- Data Models
+
+> node filesystem을 이용하여 수동 생성했던 UserDB, EmployeeDB를 mongoDB로 이전하기 위한 컨트롤러 로직 수정
+
+1. registerController.js
+
+- duplicate user 확인 : model.findOne({username:req.user}).exec()
+- new user 생성+저장 : model.create({username:req.user, password:hashedPwd})
+
+2. authController.js
+
+- registered user 여부 확인 : model.findOne({username:req.user}).exec()
+- refresh token 생성 이후 user 정보와 함께 db에 저장 :
+  1. user.refreshToken = refreshToken;
+  2. await user.save();
+
+3. refreshTokenController.js
+
+- refresh token을 가진 user가 db에 있는지 확인 : model.findOne({refreshToken:req.cookies}).exec()
+
+4. logoutController.js
+
+- logout하려는 refresh token을 가진 user가 db에 있는지 확인 : model.findOne({refreshToken:req.cookies}).exec()
+- db에서 해당 유저의 refresh token 초기화 :
+  1. user.refreshToken = "";
+  2. await user.save();

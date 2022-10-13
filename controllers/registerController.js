@@ -1,13 +1,4 @@
-const usersDB = {
-  users: require("../model/users.json"),
-  setUsers: function (data) {
-    this.users = data;
-  },
-};
-
-const fsPromises = require("fs").promises;
-const path = require("path");
-
+const User = require("../model/User");
 // hash and salt the pw - so we can securely store them in our db
 const bcrypt = require("bcrypt");
 
@@ -21,28 +12,31 @@ const handleNewUser = async (req, res) => {
       .json({ "message:": "Username and Password are required" });
 
   // check for duplicate username in the db
-  const duplicate = usersDB.users.find((person) => person.username === user);
+  // const duplicate = usersDB.users.find((person) => person.username === user);
+  const duplicate = await User.findOne({ username: user }).exec();
   if (duplicate) res.sendStatus(409); // Stands for Confiict
 
   try {
     // encrypt the pwd
     const hashedPwd = await bcrypt.hash(pwd, 10);
 
-    // stroe the new user
-    const newUser = {
+    // with mongoose :
+    // 1) create and store the new user all at once
+    const result = await User.create({
       username: user,
-      roles: {
-        User: 2001,
-      },
+      // ** 스키마에 이미 role이 default처리되어있으므로 automatically added 될 예정
+      // roles: {
+      //   User: 2001,
+      // },
       password: hashedPwd,
-    };
-    usersDB.setUsers([...usersDB.users, newUser]);
+    });
 
-    await fsPromises.writeFile(
-      path.join(__dirname, "..", "model", "users.json"),
-      JSON.stringify(usersDB.users)
-    );
-    console.log(usersDB.users);
+    console.log("새로생성된유저:", result);
+
+    // 2) Work same but in different ways (seperately)
+    // const newUser = new User();
+    // const result = await newUser.save();
+
     res.status(201).json({ success: `New User ${user} created!` });
   } catch (err) {
     res.status(500).json({ message: err.message });

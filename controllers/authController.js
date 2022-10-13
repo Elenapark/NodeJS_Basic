@@ -1,14 +1,7 @@
-const usersDB = {
-  users: require("../model/users.json"),
-  setUsers: function (data) {
-    this.users = data;
-  },
-};
+const User = require("../model/User");
 
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const fsPromises = require("fs").promises;
-const path = require("path");
 
 const handleLogin = async (req, res) => {
   const { user, pwd } = req.body;
@@ -19,7 +12,7 @@ const handleLogin = async (req, res) => {
       .status(400)
       .json({ "message:": "Username and Password are required" });
 
-  const foundUser = usersDB.users.find((person) => person.username === user);
+  const foundUser = await User.findOne({ username: user }).exec();
   if (!foundUser) return res.sendStatus(401); // Stands for unathorized
 
   // 유저가 입력한 pwd와 기존에 저장된 유저 pwd를 비교
@@ -46,15 +39,10 @@ const handleLogin = async (req, res) => {
     );
 
     // saving refresh token with user to database
-    const otherUsers = usersDB.users.filter(
-      (person) => person.username !== foundUser.username
-    );
-    const currentUser = { ...foundUser, refreshToken };
-    usersDB.setUsers([...otherUsers, currentUser]);
-    await fsPromises.writeFile(
-      path.join(__dirname, "..", "model", "users.json"),
-      JSON.stringify(usersDB.users)
-    );
+
+    foundUser.refreshToken = refreshToken;
+    const result = await foundUser.save();
+    console.log("로그인한유저:", result);
 
     res.cookie("jwt", refreshToken, {
       httpOnly: true,
