@@ -7,7 +7,7 @@ const ROLES_LIST = require("../../config/roles_list");
 
 router
   .route("/")
-  .get(employeesController.getAllEmployees) // user role is default
+  .get(employeesController.getAllEmployees) // "user" role is default
   .post(
     verifyRoles(ROLES_LIST.Admin, ROLES_LIST.Editor),
     employeesController.createNewEmployee
