@@ -7,7 +7,7 @@ const handleRefreshToken = async (req, res) => {
   if (!cookies?.jwt) return res.sendStatus(401); // unathorized
   const refreshToken = cookies.jwt;
 
-  // cookie는 있지만 refresh token이 일치하지 않는 경우 -> 만료된 경우?
+  // db에 req.cookies로 받아오는 token과 일치하는 유저가 있는지 확인 후 있으면 유저 반환
   const foundUser = await User.findOne({ refreshToken }).exec();
   if (!foundUser) return res.sendStatus(403); // Stands for Forbidden
 
