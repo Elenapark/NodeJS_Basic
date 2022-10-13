@@ -226,5 +226,14 @@
 
 - 로그인 이후 유저가 API 요청 시 어떠한 리소스까지 접근할 수 있는 유저인지 확인하는 절차
 - ex) After logging in, API issues users JWT tokens.
+
   - it's true that the tokens confirm the authentication process
   - these tokens also allow access to our api endpoints which allow our api data. this is authorization.
+
+- 유저별 서로 다른 roles를 수동으로 부여하여 API access 접근 권한 제어.
+- verifyRoles 미들웨어 설정
+
+## Chapter 13: Intro to MongoDB and Mongoose
+
+- MongoDB 설정: 클러스터 및 DATABASE URI 생성 후 .env파일로 프로젝트 연결
+- Mongoose 설정: MongoDB의 편리한 사용을 도와주는 라이브러리 개념. DB 연결 및 연결 이후에만 server가 port를 listening할 수 있도록 코드 수정
