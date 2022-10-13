@@ -238,7 +238,7 @@
 - MongoDB 설정: 클러스터 및 DATABASE URI 생성 후 .env파일로 프로젝트 연결
 - Mongoose 설정: MongoDB와 프로젝트 연결을 도와주는 라이브러리. + DB 연결 이후에만 server가 port를 listening할 수 있도록 수정
 
-## Chapter 14: Mongoose Data Models
+## Chapter 14-15: Mongoose Data Models / Async CRUD Operations
 
 > MongoDB에서 CRUD를 구현하기 위해 필요한 스펙
 
