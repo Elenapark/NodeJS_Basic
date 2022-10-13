@@ -1,23 +1,14 @@
-const usersDB = {
-  users: require("../model/users.json"),
-  setUsers: function (data) {
-    this.users = data;
-  },
-};
-
+const User = require("../model/User");
 const jwt = require("jsonwebtoken");
 
-const handleRefreshToken = (req, res) => {
+const handleRefreshToken = async (req, res) => {
   const cookies = req.cookies;
   console.log("쿠키:", cookies);
   if (!cookies?.jwt) return res.sendStatus(401); // unathorized
-  console.log(cookies.jwt);
   const refreshToken = cookies.jwt;
 
   // cookie는 있지만 refresh token이 일치하지 않는 경우 -> 만료된 경우?
-  const foundUser = usersDB.users.find(
-    (person) => person.refreshToken === refreshToken
-  );
+  const foundUser = await User.findOne({ refreshToken }).exec();
   if (!foundUser) return res.sendStatus(403); // Stands for Forbidden
 
   // evalutate jwt

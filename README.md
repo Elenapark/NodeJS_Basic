@@ -240,9 +240,32 @@
 
 ## Chapter 14: Mongoose Data Models
 
-> to perform CRUD operations on our mongoDB data collections
+> MongoDB에서 CRUD를 구현하기 위해 필요한 스펙
 
 - Mongoose Schemas
 - Data Models
 
-> node filesystem을 이용했던 db를 mongoDB로 이전
+> node filesystem을 이용하여 수동 생성했던 UserDB, EmployeeDB를 mongoDB로 이전하기 위한 컨트롤러 로직 수정
+
+1. registerController.js
+
+- duplicate user 확인 : model.findOne({username:req.user}).exec()
+- new user 생성+저장 : model.create({username:req.user, password:hashedPwd})
+
+2. authController.js
+
+- registered user 여부 확인 : model.findOne({username:req.user}).exec()
+- refresh token 생성 이후 user 정보와 함께 db에 저장 :
+  1. user.refreshToken = refreshToken;
+  2. await user.save();
+
+3. refreshTokenController.js
+
+- refresh token을 가진 user가 db에 있는지 확인 : model.findOne({refreshToken:req.cookies}).exec()
+
+4. logoutController.js
+
+- logout하려는 refresh token을 가진 user가 db에 있는지 확인 : model.findOne({refreshToken:req.cookies}).exec()
+- db에서 해당 유저의 refresh token 초기화 :
+  1. user.refreshToken = "";
+  2. await user.save();
