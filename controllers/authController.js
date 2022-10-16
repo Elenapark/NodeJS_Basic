@@ -18,7 +18,7 @@ const handleLogin = async (req, res) => {
   // 유저가 입력한 pwd와 기존에 저장된 유저 pwd를 비교
   const match = await bcrypt.compare(pwd, foundUser.password);
   if (match) {
-    const roles = Object.values(foundUser.roles);
+    const roles = Object.values(foundUser.roles).filter(Boolean);
 
     // create JWTs
     const accessToken = jwt.sign(
@@ -50,7 +50,7 @@ const handleLogin = async (req, res) => {
       // secure: true,
       maxAge: 24 * 60 * 60 * 1000, // 1day
     });
-    res.json({ accessToken });
+    res.json({ roles, accessToken });
   } else {
     res.sendStatus(401);
   }
