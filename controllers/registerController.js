@@ -14,7 +14,7 @@ const handleNewUser = async (req, res) => {
   // check for duplicate username in the db
   // const duplicate = usersDB.users.find((person) => person.username === user);
   const duplicate = await User.findOne({ username: user }).exec();
-  if (duplicate) res.sendStatus(409); // Stands for Confiict
+  if (duplicate) return res.sendStatus(409); // Stands for Confiict
 
   try {
     // encrypt the pwd

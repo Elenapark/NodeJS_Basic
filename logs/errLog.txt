@@ -15,3 +15,5 @@
 20221012	13:37:45	9289b237-a7b6-4b06-9d56-2f1717b7b2be	SyntaxError, Unexpected token e in JSON at position 0
 20221012	13:38:05	e4085b9a-e9e3-452e-ac2a-df107e5e3976	SyntaxError, Unexpected token e in JSON at position 0
 20221012	13:38:07	20925e2a-6afe-4db3-819a-8ecd984e83fc	SyntaxError, Unexpected token e in JSON at position 0
+20221016	19:35:49	39344ee6-f32b-4818-be7a-9320496e4fde	Error, Not allowed by CORS
+20221016	19:39:12	45ce71ae-164c-40ef-8d44-0da9257a70fd	Error, Not allowed by CORS
