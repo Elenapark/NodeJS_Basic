@@ -29,7 +29,7 @@ const handleLogin = async (req, res) => {
         },
       },
       process.env.ACCESS_TOKEN_SECRET,
-      { expiresIn: "10s" }
+      { expiresIn: "10m" }
     );
     // only for getting new access_token
     const refreshToken = jwt.sign(
@@ -50,7 +50,7 @@ const handleLogin = async (req, res) => {
       secure: true,
       maxAge: 24 * 60 * 60 * 1000, // 1day
     });
-    res.json({ roles, accessToken });
+    res.json({ accessToken });
   } else {
     res.sendStatus(401);
   }
